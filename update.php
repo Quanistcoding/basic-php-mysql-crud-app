@@ -3,28 +3,15 @@
 <?php 
      $result = readData();
 ?>
-
+<h2>Update Data</h2>
+<h3>integer value cannot be blank</h3>
 
 <div class="container">
 <div class="row">
 
 <div class="col-sm-6">
-<form action="update.php" method = "post">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" id = "username" name = "un">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id = "password" name = "pwd">
-    <label for="id">ID</label>
-    <select name="id" id="id">
-        <?php 
-            while($row = mysqli_fetch_assoc($result)){
-               echo "<option>$row[id]</option>";
-            };        
-        ?>
-    </select>
-    <br>
-    <input type="submit" class="btn btn-primary mt-2" value = "update" name = "submit">
-</form>
+    <?php $resultQuery = createForm(true,"update"); ?>
+
 </div>
 <div class="col-sm-6"></div>
 </div>
@@ -51,13 +38,7 @@
 <?php 
  if(isset($_POST['submit'])){
 
-    $username = $_POST["un"];
-    $password = $_POST["pwd"];
-    $id = $_POST["id"];
-    
-    $query = "UPDATE users SET username = '$username', password = '$password' WHERE id = $id";
-    
-    $result = mysqli_query($conn,$query);
+    $result = mysqli_query($conn,$resultQuery);
     if($result){
         echo <<< xxx
             <script>

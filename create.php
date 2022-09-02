@@ -1,17 +1,12 @@
-<?php include "mysql_connection.php"?>
+<?php include "functions.php"?>
 <?php include "header.php"?>
-
+<h2>Create Data</h2>
+<h3>integer value cannot be blank</h3>
 <div class="container">
 <div class="row">
 
 <div class="col-sm-6">
-<form action="create.php" method = "post">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" id = "username" name = "un">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id = "password" name = "pwd">
-    <input type="submit" class="btn btn-primary mt-2" value = "submit" name = "submit">
-</form>
+        <?php $resultQuery = createForm(false,"create"); ?>
 </div>
 <div class="col-sm-6"></div>
 </div>
@@ -35,23 +30,22 @@
 
 
 <?php 
- if(isset($_POST['submit'])){
 
-    $username = $_POST["un"];
-    $password = $_POST["pwd"];
-    
-    $query = "INSERT INTO users (username,password) VALUES ('$username','$password')";
-    
-    $result = mysqli_query($conn,$query);
-    if($result){
+
+
+
+
+ if(isset($_POST['submit'])){
+    if (mysqli_query($conn, $resultQuery)) {
         echo <<< xxx
-            <script>
-            $("#alert_success").show();
-            setTimeout(()=>{\$("#alert_success").hide();},800);
-            </script>
-        xxx;
-    }else{
-    }  
+        <script>
+        $("#alert_success").show();
+        setTimeout(()=>{\$("#alert_success").hide();},800);
+        </script>
+    xxx;
+      } else {
+        echo "xxxxxxxxxxxxxError: " .$resultQuery . "<br>" . mysqli_error($conn);
+      }
  }
 ?>
 
