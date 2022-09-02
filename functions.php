@@ -18,7 +18,7 @@ function readTableColums(){
 function displayTable(){
     $colResult = readTableColums();
     $result = readData();
-    echo "<table class = 'table'>";
+    echo "<div style = 'overflow:scroll'><table class = 'table'>";
     echo "<tr>";
    while($row = mysqli_fetch_array($colResult)){
       echo "<th>".$row[0]."</th>";
@@ -31,7 +31,7 @@ function displayTable(){
          }
          echo "</tr>";
       };
-    echo "</table>";
+    echo "</table></div>";
 };
 
 function createForm($showId,$actionPage){
@@ -46,7 +46,11 @@ function createForm($showId,$actionPage){
         if($field_name != "id"){
         echo <<< EOD
         <label for="$field_name">$firstLetterCapitilized</label>
-        <input type="$type" class="form-control" id = "$field_name" name = "$field_name" oninput = "checkIntInput()">
+        <input type="$type" class="form-control" 
+        id = "$field_name" name = "$field_name" 
+        oninput = "checkIntInput()"
+        placeholder = "$row[Type]"
+        >
         EOD;
         array_push($keys,$field_name);
         }

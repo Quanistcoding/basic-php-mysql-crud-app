@@ -44,7 +44,7 @@
         </script>
     xxx;
       } else {
-        echo "xxxxxxxxxxxxxError: " .$resultQuery . "<br>" . mysqli_error($conn);
+        echo "Error: " .$resultQuery . "<br>" . mysqli_error($conn);
       }
  }
 ?>

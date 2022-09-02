@@ -3,13 +3,9 @@ let inputsOfTypeNumber = document.querySelectorAll("input[type='number']");
 if(inputsOfTypeNumber.length > 0)submitBtn.disabled = true;
 
 function checkIntInput(){
+    submitBtn.disabled = false;  
     inputsOfTypeNumber.forEach(x=>{
-        console.log(x.value);
-        if(x.value != ""){
-            submitBtn.disabled = false;    
-        }else{
-            submitBtn.disabled = true;   
-        }
+        if(x.value == "")submitBtn.disabled = true; 
     });
 
 };
