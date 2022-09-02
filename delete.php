@@ -61,6 +61,7 @@
         echo <<< xxx
         <script>
         $("#alert_warning").show();
+        
         </script>
         xxx;
     }
@@ -73,6 +74,7 @@
         echo <<< xxx
         <script>
         $("#alert_success").show();
+        setTimeout(()=>{\$("#alert_success").hide();},800);
         </script>
         xxx;
     }
