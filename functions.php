@@ -70,12 +70,17 @@ function createForm($showId,$actionPage){
 
 
 function getSQLQuery($arr,$target){
+    global $conn;
     if(isset($_POST['submit'])){
     if($target == "create"){
         $valuesArray = [];
         $queryKeys = implode(",",$arr);
         foreach($arr as $item){
-            $v = "\"$_POST[$item]\"";
+            if($item == "password"){
+            $v = "\"".crypt($_POST[$item],'$2a$09$anexamplestringforsalt$')."\"";  
+            }else{
+            $v = "\"" . mysqli_real_escape_string($conn,$_POST[$item]) ."\"";
+            };
             array_push($valuesArray, $v);
         };
         $queryValues = implode(",",$valuesArray);       
@@ -83,7 +88,11 @@ function getSQLQuery($arr,$target){
     }else{
         $stings = [];
         foreach($arr as $item){
-            $v = "\"$_POST[$item]\"";
+            if($item == "password"){
+                $v = "\"".crypt($_POST[$item],'$2a$09$anexamplestringforsalt$')."\"";  
+                }else{
+                $v = "\"" . mysqli_real_escape_string($conn,$_POST[$item]) ."\"";
+                };
             array_push($stings,"$item = $v");
         };
         $queryItem = implode(",",$stings);
